@@ -78,5 +78,29 @@ app.post('/messages/save', async (req, res) => {
   }
 })
 
+// a route to handle fetching About Us page data
+app.get('/about', async (req, res) => {
+  try {
+    const aboutData = {
+      title: 'About Us',
+      paragraphs: [
+        'My name is Terra Nagai. I am a computer science student at NYU and I am a senior.',
+        'I am originally from the Washington D.C. area, but my family is from Tokyo, Japan. I often visit back home.',
+        'I am on the varsity Soccer team at NYU and was the captain this year. I have been playing soccer competitively since I was 4 years old.',
+        'My other interests include cooking, traveling, outdoors activities, music, photography/videography, interior design, and fashion.'
+      ],
+      imageUrl: 'http://localhost:7002/terra.jpeg',
+      status: 'all good'
+    }
+    res.json(aboutData)
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve about page data',
+    })
+  }
+})
+
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!
